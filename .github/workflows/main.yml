@@ -1,7 +1,6 @@
 name: build core
 
 on: 
-  push: 
   workflow_dispatch: 
 
 jobs:
