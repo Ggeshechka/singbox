@@ -11,8 +11,7 @@ jobs:
       - name: Клонирование репозитория sing-box
         run: git clone https://github.com/SagerNet/sing-box.git 
 
-      - name: открыть директорию sing-box
-        run: cd sing-box
-
       - name: сборка sing-box
-        run: make build
+        run: 
+          cd sing-box |
+          make build
