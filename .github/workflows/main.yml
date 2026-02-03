@@ -22,7 +22,7 @@ jobs:
           ndk-version: r28
 
       - name: Setup OpenJDK
-        run: apt update && apt install -y openjdk-17-jdk-headless
+        run: sudo apt update && sudo apt install -y openjdk-17-jdk-headless
 
       - name: Set build tags
         run: |
