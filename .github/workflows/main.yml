@@ -12,9 +12,23 @@ jobs:
       - name: Клонирование репозитория sing-box
         run: git clone https://github.com/SagerNet/sing-box.git 
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ^1.25.5
+
       - uses: nttld/setup-ndk@v1.5.0
         with:
-          ndk-version: r25c
+          ndk-version: r28
+
+      - name: Setup OpenJDK
+        run: apt update && apt install -y openjdk-17-jdk-headless
+
+      - name: Set build tags
+        run: |
+          set -xeuo pipefail
+          TAGS='with_gvisor,with_quic,with_dhcp,with_wireguard,with_utls,with_acme,with_clash_api,with_tailscale'
+          echo "BUILD_TAGS=${TAGS}" >> "${GITHUB_ENV}"
 
       - name: сборка sing-box
         working-directory: sing-box
