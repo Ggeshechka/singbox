@@ -9,11 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Клонирование репозитория sing-box
-        run: git clone https://github.com/SagerNet/sing-box.git 
+      - uses: actions/checkout@v6.0.2
+        with:
+          repository: 'SagerNet/sing-box'
+          ref: 'refs/tags/latest'
+          submodules: 'recursive'
+          fetch-depth: 0
 
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6.2.0
         with:
           go-version: ^1.25.5
 
@@ -31,7 +35,6 @@ jobs:
           echo "BUILD_TAGS=${TAGS}" >> "${GITHUB_ENV}"
 
       - name: сборка sing-box
-        working-directory: sing-box
         run: |
           make lib_install
           export PATH="$PATH:$(go env GOPATH)/bin"
