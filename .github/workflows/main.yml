@@ -12,20 +12,12 @@ jobs:
       - name: Клонирование репозитория sing-box
         run: git clone https://github.com/SagerNet/sing-box.git 
 
-      - name: check
-        run: ls
+      - name: первый способ перейти в рабочую директорию
+        run: |
+          cd sing-box
+          ls
 
-      - name: check
-        run: ls ./sing-box
-
-      - name: открыть директорию sing-box
-        run: cd sing-box
-      
-      - name: check
-        run: ls
-
-      - name: открыть директорию sing-box
-        run: cd sing-box
-      
-      - name: check
-        run: ls
+      - name: второй способ перейти в рабочую директорию
+        working-directory: sing-box
+        run: |
+          ls
