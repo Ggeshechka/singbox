@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Клонирование репозитория sing-box
@@ -14,7 +14,7 @@ jobs:
         
       - name: сборка sing-box
         working-directory: sing-box
-        run: make build
+        run: make lib_android
 
       - uses: actions/upload-artifact@v6.0.0
         with:
