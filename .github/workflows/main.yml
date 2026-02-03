@@ -1,6 +1,7 @@
 name: build core
 
 on: 
+  push: 
   workflow_dispatch: 
 
 jobs:
@@ -12,6 +13,6 @@ jobs:
         run: git clone https://github.com/SagerNet/sing-box.git 
 
       - name: сборка sing-box
-        run: 
+        run: |
           cd sing-box |
-          make build
+          ls
