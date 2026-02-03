@@ -14,7 +14,11 @@ jobs:
         
       - name: сборка sing-box
         working-directory: sing-box
-        run: |
-          make build
-          ls sing-box
-          
+        run: make build
+
+      - uses: actions/upload-artifact@v6.0.0
+        with:
+          name: linux
+          path: sing-box
+
+      
