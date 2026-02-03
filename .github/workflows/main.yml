@@ -26,7 +26,7 @@ jobs:
         with:
           ndk-version: r28
 
-      - name: Setup Java JDK
+      - name: Setup JDK
         uses: actions/setup-java@v5.2.0
         with:
           java-version: '17'
@@ -52,5 +52,3 @@ jobs:
         with:
           name: android
           path: libbox.aar
-
-      
