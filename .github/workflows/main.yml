@@ -20,3 +20,9 @@ jobs:
       
       - name: check
         run: ls
+
+       - name: открыть директорию sing-box
+        run: cd sing-box
+      
+      - name: check
+        run: ls
