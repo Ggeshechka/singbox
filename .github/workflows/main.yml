@@ -20,11 +20,18 @@ jobs:
         with:
           go-version: 1.25.6
 
-      - uses: nttld/setup-ndk@v1.5.0
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1.5.0
         id: setup-ndk
         with:
           ndk-version: r28
 
+      - name: Setup Java JDK
+        uses: actions/setup-java@v5.2.0
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+        
       - name: Setup OpenJDK
         run: sudo apt update && sudo apt install -y openjdk-17-jdk-headless
 
@@ -42,9 +49,9 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-          CGO_ENABLED: "1"
-    
-      - uses: actions/upload-artifact@v6.0.0
+
+      - name: Загрузка артифактов
+        uses: actions/upload-artifact@v6.0.0
         with:
           name: android
           path: libbox.aar
