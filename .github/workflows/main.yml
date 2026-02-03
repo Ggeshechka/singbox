@@ -12,7 +12,9 @@ jobs:
       - name: Клонирование репозитория sing-box
         run: git clone https://github.com/SagerNet/sing-box.git 
 
-      - uses: actions/setup-go@v6.2.0    
+      - uses: actions/setup-go@v6.2.0
+        with:
+          go-version: "stable"
         
       - name: сборка sing-box
         working-directory: sing-box
