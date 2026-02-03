@@ -9,7 +9,10 @@ jobs:
 
     steps:
       - name: Клонирование репозитория sing-box
-        run: git clone https://github.com/SagerNet/sing-box.git
+        run: git clone https://github.com/SagerNet/sing-box.git 
 
-      - name: Проверка дирректории
-        run: ls
+      - name: открыть директорию sing-box
+        run: cd sing-box
+
+      - name: сборка sing-box
+        run: make build
