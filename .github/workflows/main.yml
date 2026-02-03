@@ -16,6 +16,7 @@ jobs:
         working-directory: sing-box
         run: |
           make lib_install
+          export PATH="$PATH:$(go env GOPATH)/bin"
           make lib_android    
     
       - uses: actions/upload-artifact@v6.0.0
