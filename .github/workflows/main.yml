@@ -11,14 +11,12 @@ jobs:
     steps:
       - name: Клонирование репозитория sing-box
         run: git clone https://github.com/SagerNet/sing-box.git 
-
-      - uses: actions/setup-go@v6.2.0
-        with:
-          go-version: "stable"
         
       - name: сборка sing-box
         working-directory: sing-box
-        run: make lib_android    
+        run: |
+          make lib_install
+          make lib_android    
     
       - uses: actions/upload-artifact@v6.0.0
         with:
