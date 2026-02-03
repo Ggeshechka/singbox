@@ -16,6 +16,10 @@ jobs:
         working-directory: sing-box
         run: make lib_android
 
+
+      - uses: actions/setup-go@v6.2.0         
+      
+
       - uses: actions/upload-artifact@v6.0.0
         with:
           name: linux
