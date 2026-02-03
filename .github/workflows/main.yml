@@ -12,6 +12,12 @@ jobs:
       - name: Клонирование репозитория sing-box
         run: git clone https://github.com/SagerNet/sing-box.git 
 
+      - name: Setup Android NDK
+        id: setup-ndk
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r28
+
       - name: сборка sing-box
         working-directory: sing-box
         run: |
