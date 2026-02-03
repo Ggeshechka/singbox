@@ -14,4 +14,8 @@ jobs:
         
       - name: сборка sing-box
         working-directory: sing-box
-        run: make build
+        run: |
+          ls
+          make build
+          ls
+          
