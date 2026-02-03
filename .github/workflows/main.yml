@@ -12,7 +12,6 @@ jobs:
       - uses: actions/checkout@v6.0.2
         with:
           repository: 'SagerNet/sing-box'
-          ref: 'refs/tags/latest'
           submodules: 'recursive'
           fetch-depth: 0
 
