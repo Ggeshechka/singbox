@@ -58,6 +58,8 @@ jobs:
   
       - name: build
         run: |
+          CGO_ENABLED=0 
+          GOOS=linux
           GOARCH=amd64
           make build
   
@@ -79,8 +81,11 @@ jobs:
           fetch-depth: 0
           
       - name: build
+        shell: pwsh
         run: |
-          GOARCH=amd64
+          $env:CGO_ENABLED="0"
+          $env:GOOS="windows"
+          $env:GOARCH="amd64"
           make build
 
       - name: Загрузка артифактов
