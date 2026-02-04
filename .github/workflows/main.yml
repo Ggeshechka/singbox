@@ -5,12 +5,12 @@ on:
   workflow_dispatch: 
 
 jobs:
-  build:
+  build_android:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        target: [android, linux, windows]
+        target: [android, linux]
 
     steps:
       - uses: actions/checkout@v6.0.2
@@ -62,6 +62,29 @@ jobs:
         uses: actions/upload-artifact@v6.0.0
         with:
           name: sing-box-${{ matrix.target }}
-          path: ${{ matrix.target == 'android' && 'libbox.aar' || 
-                matrix.target == 'linux' && 'sing-box' || 
-                'sing-box.exe' }}
+          path: ${{ matrix.target == 'android' && 'libbox.aar' || 'sing-box' }}
+                
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v6.0.2
+        with:
+          repository: 'SagerNet/sing-box'
+          submodules: 'recursive'
+          fetch-depth: 0
+          
+      - name: Set build tags
+        run: |
+          set -xeuo pipefail
+          TAGS=''
+          echo "BUILD_TAGS=${TAGS}" >> "${GITHUB_ENV}"
+          
+      - name: build
+        run: make build
+
+      - name: Загрузка артифактов
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: sing-box-windows
+          path: 'sing-box.exe'
