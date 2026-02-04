@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        target: [android, linux]
+
     steps:
       - uses: actions/checkout@v6.0.2
         with:
@@ -16,17 +20,20 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Go
+        if: matrix.target == 'android'
         uses: actions/setup-go@v6.2.0
         with:
           go-version: 1.25.6
 
       - name: Setup NDK
+        if: matrix.target == 'android'
         uses: nttld/setup-ndk@v1.5.0
         id: setup-ndk
         with:
           ndk-version: r28
 
       - name: Setup JDK
+        if: matrix.target == 'android'
         uses: actions/setup-java@v5.2.0
         with:
           java-version: '17'
@@ -38,17 +45,21 @@ jobs:
           TAGS=''
           echo "BUILD_TAGS=${TAGS}" >> "${GITHUB_ENV}"
 
-      - name: сборка sing-box
+      - name: android build
+        if: matrix.target == 'android'
         run: |
           make lib_install
           export PATH="$PATH:$(go env GOPATH)/bin"
           make lib_android
         env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}  
-          CGO_ENABLED: "1"
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+      - name: linux build
+        if: matrix.target == 'linux'
+        run: make build
 
       - name: Загрузка артифактов
         uses: actions/upload-artifact@v6.0.0
         with:
-          name: android
-          path: libbox.aar
+          name: sing-box-${{ matrix.target }}
+          path: ${{ matrix.target == 'android' && 'libbox.aar' || 'sing-box' }}
