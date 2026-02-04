@@ -74,12 +74,6 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
           
-      - name: Set build tags
-        run: |
-          set -xeuo pipefail
-          TAGS=''
-          echo "BUILD_TAGS=${TAGS}" >> "${GITHUB_ENV}"
-          
       - name: build
         run: make build
 
