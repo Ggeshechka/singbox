@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        target: [android, linux]
+        target: [android, linux, windows]
 
     steps:
       - uses: actions/checkout@v6.0.2
@@ -55,11 +55,13 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: linux build
-        if: matrix.target == 'linux'
+        if: matrix.target != 'android'
         run: make build
 
       - name: Загрузка артифактов
         uses: actions/upload-artifact@v6.0.0
         with:
           name: sing-box-${{ matrix.target }}
-          path: ${{ matrix.target == 'android' && 'libbox.aar' || 'sing-box' }}
+          path: ${{ matrix.target == 'android' && 'libbox.aar' || 
+                matrix.target == 'linux' && 'sing-box' || 
+                'sing-box.exe' }}
