@@ -39,12 +39,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set build tags
-        run: |
-          set -xeuo pipefail
-          TAGS=''
-          echo "BUILD_TAGS=${TAGS}" >> "${GITHUB_ENV}"
-
       - name: android build
         if: matrix.target == 'android'
         run: |
