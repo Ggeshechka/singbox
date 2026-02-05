@@ -9,7 +9,7 @@ permissions:
 
 env:
   TAGS: >-
-    with_utls, with_gvisor
+    with_utls,with_gvisor
     
 
 jobs:
