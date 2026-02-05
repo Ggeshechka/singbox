@@ -116,6 +116,13 @@ jobs:
       - name: Показать файлы (проверка)
         run: ls -R dist
 
+      - name: Упаковать файлы в архивы
+        run: |
+          mkdir -p release
+          zip -9 release/libbox-android.zip dist/libbox.aar
+          zip -9 release/sing-box-linux.zip dist/sing-box
+          zip -9 release/sing-box-windows.zip dist/sing-box.exe  
+
       - name: Создать GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -123,7 +130,7 @@ jobs:
           name: build-${{ github.run_number }}
           generate_release_notes: true
           files: |
-            dist/libbox.aar
-            dist/sing-box
-            dist/sing-box.exe
+            release/libbox-android.zip
+            release/sing-box-linux.zip
+            release/sing-box-windows.zip
 
